@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world
+  name: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-world
+        image: rarg27/kumu-hello-world:latest
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: hello-world
+        - secretRef:
+            name: hello-world

@@ -1,0 +1,5 @@
+deployment:
+  podAnnotations:
+    linkerd.io/inject: ingress
+service:
+  type: ClusterIP
